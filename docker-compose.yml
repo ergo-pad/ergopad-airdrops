@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  
+  discord-bot:
+    container_name: discord-bot
+    build:
+      context: ./discord
+      dockerfile: ./Dockerfile
+    restart: always
+    env_file: .env
+    logging:
+        driver: "json-file"
+        options:
+            max-file: 5
+            max-size: 10m
+    command: python bot.py
+  
+  telegram-bot:
+    container_name: telegram-bot
+    build:
+      context: ./telegram
+      dockerfile: ./Dockerfile
+    restart: always
+    env_file: .env
+    logging:
+        driver: "json-file"
+        options:
+            max-file: 5
+            max-size: 10m
+    command: python bot.py
